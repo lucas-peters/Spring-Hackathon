@@ -6,7 +6,7 @@ const { runtime } = addOnSandboxSdk.instance;
 
 function start() {
     // APIs to be exposed to the UI runtime
-    // i.e., to the `App.js` file of this add-on.
+    // i.e., to the `index.html` file of this add-on.
     const sandboxApi = {
         createRectangle: () => {
             const rectangle = editor.createRectangle();
