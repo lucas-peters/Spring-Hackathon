@@ -1,19 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta
-            name="description"
-            content="Get started with Add-on development using Spectrum Web Components and JavaScript with Document Sandbox Runtime"
-        />
-        <meta
-            name="keywords"
-            content="Adobe, Express, Add-On, Spectrum Web Components, JavaScript, Document Sandbox Runtime"
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Get Started</title>
-    </head>
-    <body>
-        <add-on-root></add-on-root>
-    </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Element Transformer Add-on</title>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="add-on-container" class="add-on-container">
+    <!-- Content will be dynamically inserted here via JavaScript -->
+  </div>
+
+  <!-- Loading overlay -->
+  <div id="loading-overlay" class="loading-overlay hidden">
+    <div class="spinner"></div>
+    <div id="loading-message" class="loading-message">Loading...</div>
+  </div>
+  <!--<div id="selection">Please make a selection </div>-->
+
+  <!-- Notification container -->
+  <div id="notification-container" class="notification-container"></div>
+
+  <!-- Scripts -->
+  <script type="module" src="app.js"></script>
+</body>
 </html>

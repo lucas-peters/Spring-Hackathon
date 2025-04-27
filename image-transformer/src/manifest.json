@@ -1,6 +1,6 @@
 {
-    "testId": "ccb5c449-d350-4fff-bf75-ab7c145a1c28",
-    "name": "Hello World",
+    "testId": "b489b6a7-8fee-406b-81c7-8386e40c23a5",
+    "name": "Image Transformer2",
     "version": "1.0.0",
     "manifestVersion": 2,
     "requirements": {
@@ -16,7 +16,7 @@
             "type": "panel",
             "id": "panel1",
             "main": "index.html",
-            "documentSandbox": "code.js"
+            "documentSandbox": "sandbox/code.js"
         }
     ]
 }
