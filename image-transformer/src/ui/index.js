@@ -22,3 +22,13 @@ addOnUISdk.ready.then(async () => {
     // 3. `click` event listener is registered.
     createRectangleButton.disabled = false;
 });
+
+// addOnUISdk.ready.then(async () => {
+//     const { runtime } = addOnUISdk.instance;
+//     const button = document.getElementById("selectNodeButton");
+//     button.addEventListener("click", async () => {
+//         const sandboxProxy = await runtime.apiProxy("documentSandbox");
+//         sandboxProxy.selectNodeForAI(); // Call the function when button is pressed
+//     });
+//     button.disabled = false;
+// });

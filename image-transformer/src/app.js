@@ -261,6 +261,16 @@ function createSelectionScreen() {
   selectAllBtn.className = 'select-all-button';
   selectAllBtn.addEventListener('click', handleSelectAllElements);
   screen.appendChild(selectAllBtn);
+
+  // Create "Select Current Element" button
+  // const selectNodeButton = document.createElement('button');
+  // selectNodeButton.textContent = 'Select Current Element';
+  // selectNodeButton.id = 'selectNodeButton';
+  // selectNodeButton.addEventListener('click', async () => {
+  //   const sandboxProxy = await runtime.apiProxy("documentSandbox");
+  //   sandboxProxy.selectNodeForAI(); // Call the function when button is pressed
+  // });
+  // screen.appendChild(selectNodeButton);
   
   // Create selected elements container
   const elementsContainer = document.createElement('div');
@@ -286,9 +296,38 @@ function createSelectionScreen() {
   const nextBtn = document.createElement('button');
   nextBtn.textContent = 'Next →';
   nextBtn.className = 'primary-button next-button';
-  nextBtn.addEventListener('click', () => {
-    state.currentScreen = 'chat';
-    renderCurrentScreen();
+  nextBtn.addEventListener('click', async () => {
+    try {
+      // Show loading state
+      nextBtn.disabled = true;
+      showLoading("Processing selection...");
+      
+      // Call the sandbox function to make other objects invisible
+      const { runtime } = addOnUISdk.instance;
+      const sandboxProxy = await runtime.apiProxy("documentSandbox");
+      const result = await sandboxProxy.handleNextButtonFrame1();
+      
+      if (!result.success) {
+        // Show error message if no element is selected
+        hideLoading();
+        showError(result.error || "Failed to process selection");
+        nextBtn.disabled = false;
+        return;
+      }
+      
+      // Hide loading and proceed to next screen
+      hideLoading();
+      showSuccess("Selected element processed successfully");
+      
+      // Change to chat screen
+      state.currentScreen = 'chat';
+      renderCurrentScreen();
+    } catch (error) {
+      console.error("Error handling next button:", error);
+      hideLoading();
+      showError("An unexpected error occurred. Please try again.");
+      nextBtn.disabled = false;
+    }
   });
   screen.appendChild(nextBtn);
   
@@ -545,6 +584,29 @@ async function handleSelectAllElements() {
     showError('Failed to select elements. Please try again.');
   }
 }
+
+
+// async function handleSelectCurrentElement() {
+//   try {
+//     // Show loading
+//     showLoading("Getting current element...");
+    
+//     // This would use the Adobe Express SDK to select the current element
+//     const element = await addOnUISdk.instance.document.elements.getCurrent();
+    
+//     state.selectedElements = [element];
+    
+//     // Hide loading
+//     hideLoading();
+    
+//     // Update UI
+//     renderCurrentScreen();
+//   } catch (error) {
+//     console.error('Error selecting current element:', error);
+//     hideLoading();
+//     showError('Failed to select element. Please try again.');
+//   }
+// }
 
 // Handle removing an element from selection
 function removeElement(index) {
