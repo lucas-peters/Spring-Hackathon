@@ -8,7 +8,7 @@ module.exports = {
     mode: isEnvProduction ? "production" : "development",
     devtool: "source-map",
     entry: {
-        index: "./src/ui/index.js",
+        index: "./src/app.js",
         code: "./src/sandbox/code.js"
     },
     experiments: {
